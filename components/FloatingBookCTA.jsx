@@ -302,12 +302,13 @@ function getBotResponse(input, isAr) {
       const tertiary = ragChunks[2]
       _lastTopic = 'sea'
       const greeting = personalizeOpening(isAr)
-      let responseText = greeting + primary.content
+      const pickContent = (chunk) => (isAr && chunk.contentAr) ? chunk.contentAr : chunk.content
+      let responseText = greeting + pickContent(primary)
       if (secondary && secondary.id !== primary.id) {
-        responseText += `\n\n---\n\n${secondary.content}`
+        responseText += `\n\n---\n\n${pickContent(secondary)}`
       }
       if (tertiary && tertiary.id !== primary.id && tertiary.id !== secondary?.id) {
-        responseText += `\n\n---\n\n${tertiary.content}`
+        responseText += `\n\n---\n\n${pickContent(tertiary)}`
       }
       // Append personalized context hint based on session memory
       const ctxHint = buildContextHint(isAr)
