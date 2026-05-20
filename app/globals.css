@@ -753,6 +753,10 @@ body {
     flex-wrap: nowrap !important;
     width: auto !important;
     align-self: center !important;
+    gap: 2px !important;
+  }
+  .hero-stat-cell {
+    padding: 8px 4px !important;
   }
 
   /* Chapter overlays: center text, clear nav, reset negative offsets */
@@ -833,13 +837,21 @@ body {
 }
 /* Mobile phones (≤767px): stat/card sizing — must come after 870px block to win cascade */
 @media (max-width: 767px) {
-  .hero-stat-cell   { flex: 1 1 0% !important; min-width: 0 !important; padding: 8px 2px !important; border-right: none !important; justify-content: center !important; }
+  .hero-stat-cell   { flex: 1 1 0% !important; min-width: 0 !important; padding: 8px 4px !important; border-right: none !important; justify-content: center !important; }
   .hero-stat-number { font-size: 0.75rem !important; }
-  .hero-stat-label  { font-size: 7px !important; letter-spacing: 0.05em !important; }
+  .hero-stat-label  { font-size: 7px !important; letter-spacing: 0.05em !important; white-space: normal !important; word-break: break-word !important; max-width: 56px !important; }
   .hero-card-title  { font-size: 0.85rem !important; }
   .hero-card-btn    { padding: 1px 8px !important; font-size: 0.5rem !important; letter-spacing: 0.08em !important; white-space: normal !important; word-break: keep-all !important; }
   .hero-chapter-first .hero-glass-card-first { margin-top: 40px !important; }
   .hero-intro-cta { padding: 1px clamp(6px, 1.5vw, 32px) !important; }
+}
+
+/* Very small phones (≤480px): extra breathing room for stats */
+@media (max-width: 480px) {
+  .hero-stats-wrap { gap: 4px !important; }
+  .hero-stat-cell { padding: 6px 3px !important; }
+  .hero-stat-label { font-size: 6.5px !important; max-width: 48px !important; }
+  .hero-stat-number { font-size: 0.7rem !important; }
 }
 
 /* ── Floating chatbot (Layla): move to bottom-LEFT on mobile so it doesn't block right-side content ── */

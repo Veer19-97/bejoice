@@ -542,27 +542,27 @@ export default function Nav({ onQuoteClick, onWhyClick, onServicesClick, onTools
                 {
                   num: '01',
                   title: 'Heavy Lift / ODC / OOG Transportation',
-                  desc: 'Hydraulic axle transport for wind turbines, transformers, generators, and large industrial machinery.',
+                  desc: 'Conventional Hydraulic Axles for wind turbines, transformers, generators, industrial machinery & large project cargo',
                 },
                 {
                   num: '02',
                   title: 'Route Survey & Feasibility Study',
-                  desc: 'Physical inspection of the full route from pickup to delivery, identifying and resolving risks before movement.',
+                  desc: 'Physical inspection and analysis of the full transportation route',
                 },
                 {
                   num: '03',
                   title: 'Route Modification for ODC Transport',
-                  desc: 'Removal of traffic signals, guardrails, overhead cables, and bypass construction to clear path for oversized cargo.',
+                  desc: 'Removal of obstacles: traffic signals, guardrails, overhead cables & bypass construction',
                 },
                 {
                   num: '04',
                   title: 'Onsite Jacking & Skidding',
-                  desc: 'Precision lifting for transformers and large modules; horizontal movement via skid systems and engineered beams.',
+                  desc: 'Lift heavy equipment and horizontally move cargo along skid beams',
                 },
                 {
                   num: '05',
                   title: 'Technical Engineering Solutions',
-                  desc: 'Lift plans, load distribution calculations, and structural analysis for safe heavy cargo transport.',
+                  desc: 'Lift plans, load distribution calculations & structural analysis',
                 },
               ].map((item, i) => {
                 const arItem = ar.nav.heavyServices[i]
@@ -619,13 +619,13 @@ export default function Nav({ onQuoteClick, onWhyClick, onServicesClick, onTools
               padding: 'clamp(0.9rem,2.5vw,1.3rem) clamp(1.4rem,4vw,2rem) clamp(1.1rem,2.5vw,1.6rem)',
               borderTop: '1px solid rgba(91,194,231,0.12)',
               background: 'linear-gradient(0deg, rgba(91,194,231,0.05) 0%, transparent 100%)',
-              display: 'flex', gap: '0.75rem', flexWrap: 'wrap',
+              display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center',
               marginTop: '0.4rem',
             }}>
               <button
                 onClick={() => { setHeavyOpen(false); openCalPopup() }}
                 style={{
-                  flex: '1 1 176px', padding: '1rem 1.6rem', minHeight: 52,
+                  flex: '0 1 auto', padding: '1rem 1.6rem', minHeight: 52,
                   background: 'linear-gradient(135deg, #5BC2E7 0%, #8DD8F0 50%, #5BC2E7 100%)',
                   border: 'none', borderRadius: 12, cursor: 'pointer',
                   fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
@@ -639,21 +639,7 @@ export default function Nav({ onQuoteClick, onWhyClick, onServicesClick, onTools
               >
                 {isAr ? ar.nav.bookConsult : 'Book a Consultation →'}
               </button>
-              <button
-                onClick={() => { setHeavyOpen(false); const el = document.getElementById('heavy-cargo'); if (el) { if (window.__lenis) window.__lenis.scrollTo(el, { offset: -80, immediate: true }); else el.scrollIntoView({ behavior: 'instant' }) } }}
-                style={{
-                  flex: '1 1 156px', padding: '1rem 1.6rem', minHeight: 52,
-                  background: 'transparent',
-                  border: '1.5px solid rgba(91,194,231,0.35)', borderRadius: 12, cursor: 'pointer',
-                  fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
-                  fontSize: 'clamp(0.95rem,2vw,1.1rem)', letterSpacing: '0.2em',
-                  color: 'rgba(91,194,231,0.85)', transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(91,194,231,0.09)'; e.currentTarget.style.borderColor = 'rgba(91,194,231,0.6)'; e.currentTarget.style.color = '#8DD8F0' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(91,194,231,0.35)'; e.currentTarget.style.color = 'rgba(91,194,231,0.85)' }}
-              >
-                {isAr ? ar.nav.viewSection : 'View Full Section ↓'}
-              </button>
+
             </div>
           </div>
         </div>
