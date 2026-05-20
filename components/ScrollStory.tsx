@@ -263,7 +263,7 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
     ctx.imageSmoothingQuality = 'high';
     if ('filter' in ctx) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (ctx as any).filter = idx < BIC_COUNT ? 'contrast(1.08) saturate(1.12) brightness(1.6)' : 'contrast(1.08) saturate(1.12) brightness(1.02)';
+      (ctx as any).filter = idx < BIC_COUNT ? 'contrast(1.08) saturate(1.12) brightness(1.35)' : 'contrast(1.08) saturate(1.12) brightness(1.02)';
     }
     ctx.drawImage(img, x, y, w, h);
     ctx.restore();
@@ -443,7 +443,7 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const render = () => {
-      smoothP = lerp(smoothP, targetP, 0.15);
+      smoothP = lerp(smoothP, targetP, 0.4);
 
       const frameIdx = Math.min(
         Math.round(Math.min(smoothP / FRAME_END_P, 1) * (TOTAL_FRAMES - 1)),
@@ -475,8 +475,6 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
       const rect = wrapper.getBoundingClientRect();
       const total = wrapper.offsetHeight - window.innerHeight;
       const newP = Math.max(0, Math.min(1, -rect.top / total));
-
-      if (Math.abs(newP - targetP) > 0.04) smoothP = newP;
 
       targetP = newP;
       if (!rafId) rafId = requestAnimationFrame(render);
