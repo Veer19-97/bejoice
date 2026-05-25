@@ -10,8 +10,8 @@ const BejoiceGlobeInner = dynamic(() => import('@/components/BejoiceGlobe'), { s
 // ── Config (mirrors Bejoice_backup VideoHero architecture) ────────────────
 const SCROLL_HEIGHT = 1600;  // vh — total scroll room
 const FRAME_END_P = 0.94;  // last 6 % dwells on final frame
-const FRAME_FADE = 18;    // frames to cross-fade chapter text in / out
-const SEG_RAMP = 15;    // frames to dip-to-black at footage cut points
+const FRAME_FADE = 24;    // frames to cross-fade chapter text in / out
+const SEG_RAMP = 22;    // frames to dip-to-black at footage cut points
 
 function pad(n: number) { return String(n).padStart(4, '0'); }
 
@@ -38,13 +38,13 @@ const FRAMES8_START = PORT_START + PORT_COUNT;           // 534
 const TECH_START = FRAMES8_START + FRAMES8_COUNT;        // 655
 
 const FRAME_URLS: string[] = [
-  // bic zoomout (0–144) — 72 unique images stretched over 145 slots
+  // bic zoomout (0–144) — 85 unique images stretched over 145 slots
   ...Array.from({ length: BIC_COUNT }, (_, i) => {
-    const imgIdx = Math.min(Math.floor((i / BIC_COUNT) * 72) + 1, 72);
+    const imgIdx = Math.min(Math.floor((i / BIC_COUNT) * 85) + 1, 85);
     return `/bic/frame_${pad(imgIdx)}.webp`;
   }),
   // globe bridge (145–210) — repeats last bic frame; no intermediate image should flash
-  ...Array.from({ length: GLOBE_COUNT }, () => `/bic/frame_0072.webp`),
+  ...Array.from({ length: GLOBE_COUNT }, () => `/bic/frame_0085.webp`),
   // bejoice (211–439) — 73 images spread over 229 slots
   ...Array.from({ length: BEJOICE_COUNT }, (_, i) => {
     const imgIdx = Math.min(Math.floor((i / BEJOICE_COUNT) * 73) + 1, 73);
@@ -263,7 +263,7 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
     ctx.imageSmoothingQuality = 'high';
     if ('filter' in ctx) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (ctx as any).filter = idx < BIC_COUNT ? 'contrast(1.08) saturate(1.12) brightness(1.35)' : 'contrast(1.08) saturate(1.12) brightness(1.02)';
+      (ctx as any).filter = idx < BIC_COUNT ? 'contrast(1.15) saturate(1.2) brightness(1.25) drop-shadow(0 0 2px rgba(0,0,0,0.3))' : 'contrast(1.08) saturate(1.12) brightness(1.02)';
     }
     ctx.drawImage(img, x, y, w, h);
     ctx.restore();
