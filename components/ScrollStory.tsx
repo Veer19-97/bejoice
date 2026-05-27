@@ -349,19 +349,19 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
     }
   };
 
-  // ── Image loading — phased for mobile performance ─────────────────────
+  // ── Image loading — immediate, highest-priority for first frames ──────
   useEffect(() => {
     framesRef.current = new Array(TOTAL_FRAMES);
 
-    const loadRange = (from: number, to: number) => {
+    const loadRange = (from: number, to: number, priority: 'high' | 'auto' = 'auto') => {
       for (let i = from; i <= to; i++) {
         if (framesRef.current[i]) continue;
         const img = new Image();
+        if (priority === 'high') img.fetchPriority = 'high';
         const idx = i;
         img.onload = () => {
           framesRef.current[idx] = img;
 
-          // Drive loader bar from bic progress only
           if (idx < BIC_COUNT) {
             const loaded = framesRef.current
               .slice(0, BIC_COUNT)
@@ -370,7 +370,6 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
           }
 
           if (kickRenderRef.current) kickRenderRef.current();
-
           if (idx === BIC_COUNT - 1) onLoaded();
         };
         img.onerror = () => {
@@ -381,33 +380,30 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
       }
     };
 
-    // Phase 0: Load frame 0 with high priority so canvas paints instantly
-    const firstImg = new Image();
-    firstImg.fetchPriority = 'high';
-    firstImg.onload = () => {
-      framesRef.current[0] = firstImg;
+    // Paint initial frame when first image loads
+    const paintOnLoad = (idx: number) => {
       if (lastIdxRef.current === -1) {
         lastIdxRef.current = -1;
         paintFrame(0);
         applyProgress(FRAME_FADE);
       }
     };
-    firstImg.onerror = () => { framesRef.current[0] = null; };
-    firstImg.src = FRAME_URLS[0];
-    // Phase 1 (immediate): remaining bic — drives loader bar
-    loadRange(1, BIC_COUNT - 1);
-    // Phase 2 (200ms): globe bridge + bejoice
-    const t1 = setTimeout(() => loadRange(BIC_COUNT, BEJOICE_START + BEJOICE_COUNT - 1), 200);
-    // Phase 3 (600ms): port
-    const t2 = setTimeout(() => loadRange(PORT_START, FRAMES8_START - 1), 600);
-    // Phase 4 (1000ms): frames8 / air freight
-    const t3 = setTimeout(() => loadRange(FRAMES8_START, TECH_START - 1), 1000);
-    // Phase 5 (1400ms): tech engineering
-    const t4 = setTimeout(() => loadRange(TECH_START, TOTAL_FRAMES - 1), 1400);
 
-    return () => {
-      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4);
+    // Seed canvas as soon as frame 0 arrives (may already be cached from preload)
+    const seedImg = new Image();
+    seedImg.fetchPriority = 'high';
+    seedImg.onload = () => {
+      framesRef.current[0] = seedImg;
+      paintOnLoad(0);
     };
+    seedImg.onerror = () => { framesRef.current[0] = null; };
+    seedImg.src = FRAME_URLS[0];
+    framesRef.current[0] = seedImg;
+
+    // Load all frames immediately — no artificial delays
+    loadRange(1, 9, 'high');
+    loadRange(10, TOTAL_FRAMES - 1);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

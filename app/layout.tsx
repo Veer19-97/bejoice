@@ -46,6 +46,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bejoiceshipping-ksa.com'),
   title: "Bejoice — Saudi Arabia's Leading AI-Powered Smart Freight Forwarding",
   description: 'Award-winning freight forwarder delivering seamless end-to-end logistics with reliability and global reach.',
   keywords: 'freight forwarding, logistics, Saudi Arabia, KSA, air freight, sea freight, customs clearance',
@@ -60,6 +61,24 @@ export const metadata: Metadata = {
     title: "Bejoice — Smart Freight Forwarding",
     description: 'Award-winning freight forwarder delivering seamless end-to-end logistics.',
     type: 'website',
+    siteName: 'Bejoice Logistics',
+    locale: 'en_US',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Bejoice — Saudi Arabia's Leading AI-Powered Smart Freight Forwarding",
+    description: 'Award-winning freight forwarder delivering seamless end-to-end logistics with reliability and global reach.',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+  alternates: {
+    canonical: 'https://bejoiceshipping-ksa.com/',
+    languages: { en: 'https://bejoiceshipping-ksa.com/', ar: 'https://bejoiceshipping-ksa.com/ar' },
   },
 };
 
@@ -78,6 +97,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${bebasNeue.variable} ${dmSans.variable} ${cormorant.variable} ${cairo.variable} ${plusJakarta.variable} ${inter.variable}`}
     >
       <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Bejoice Logistics",
+            url: "https://bejoiceshipping-ksa.com",
+            logo: "https://bejoiceshipping-ksa.com/favicon.svg",
+            foundingDate: "2006",
+            areaServed: { "@type": "Country", name: "SA" },
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+966-xx-xxx-xxxx",
+              contactType: "customer service",
+              areaServed: "SA",
+            },
+            sameAs: [
+              "https://www.linkedin.com/company/bejoice",
+              "https://www.instagram.com/bejoice",
+            ],
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Freight Forwarding Services",
+              itemListElement: [
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Air Freight", description: "Time-critical global air cargo with priority handling" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sea Freight", description: "FCL and LCL ocean freight worldwide" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Land Freight", description: "FTL and LTL transport across GCC" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Customs Clearance", description: "ZATCA-certified customs brokerage" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Warehousing", description: "Bonded warehouse in Saudi Arabia" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Heavy Lift & Project Logistics", description: "Heavy-lift and out-of-gauge logistics" } },
+              ],
+            },
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Dammam",
+              addressRegion: "Eastern Province",
+              addressCountry: "SA",
+            },
+          }),
+        }} />
         {/* Preconnect for performance */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -86,7 +144,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cal.com" />
         <link rel="preconnect" href="https://app.cal.com" />
-        <link rel="preload" href="/bic/frame_0001.webp" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0001.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0002.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0003.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0004.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0005.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0006.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0007.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0008.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0009.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/bic/frame_0010.png" as="image" fetchPriority="high" />
         <link rel="preconnect" href="https://flagcdn.com" />
       </head>
       <body>
