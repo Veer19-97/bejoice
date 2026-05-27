@@ -38,10 +38,12 @@ const FRAMES8_START = PORT_START + PORT_COUNT;           // 534
 const TECH_START = FRAMES8_START + FRAMES8_COUNT;        // 655
 
 const FRAME_URLS: string[] = [
-  // bic zoomout (0–144) — 85 unique images stretched over 145 slots
+  // bic zoomout (0–144) — 85 unique images stretched over 145 slots, HDR-quality PNG
   ...Array.from({ length: BIC_COUNT }, (_, i) => {
     const imgIdx = Math.min(Math.floor((i / BIC_COUNT) * 85) + 1, 85);
-    return `/bic/frame_${pad(imgIdx)}.webp`;
+    return imgIdx === 85
+      ? `/bic/frame_${pad(imgIdx)}.webp`
+      : `/bic/frame_${pad(imgIdx)}.png`;
   }),
   // globe bridge (145–210) — repeats last bic frame; no intermediate image should flash
   ...Array.from({ length: GLOBE_COUNT }, () => `/bic/frame_0085.webp`),
@@ -263,7 +265,7 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
     ctx.imageSmoothingQuality = 'high';
     if ('filter' in ctx) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (ctx as any).filter = idx < BIC_COUNT ? 'contrast(1.15) saturate(1.2) brightness(1.25) drop-shadow(0 0 2px rgba(0,0,0,0.3))' : 'contrast(1.08) saturate(1.12) brightness(1.02)';
+      (ctx as any).filter = idx < BIC_COUNT ? 'contrast(1.28) saturate(1.35) brightness(1.12) drop-shadow(0 0 3px rgba(0,0,0,0.4))' : 'contrast(1.08) saturate(1.12) brightness(1.02)';
     }
     ctx.drawImage(img, x, y, w, h);
     ctx.restore();
@@ -439,11 +441,14 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
     let targetP = 0;
     let smoothP = 0;
     let rafId: number | null = null;
+    let velocity = 0;
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const render = () => {
-      smoothP = lerp(smoothP, targetP, 0.4);
+      velocity = Math.abs(targetP - smoothP);
+      const l = velocity > 0.04 ? 0.55 : velocity > 0.008 ? 0.38 : 0.15;
+      smoothP = lerp(smoothP, targetP, l);
 
       const frameIdx = Math.min(
         Math.round(Math.min(smoothP / FRAME_END_P, 1) * (TOTAL_FRAMES - 1)),
@@ -457,7 +462,7 @@ export default function ScrollStory({ onProgress, onLoaded, chapterOffsets, onQu
         shRef.current.style.opacity = '0';
       }
 
-      if (Math.abs(smoothP - targetP) > 0.0001) {
+      if (Math.abs(smoothP - targetP) > 0.00008) {
         rafId = requestAnimationFrame(render);
       } else {
         rafId = null;
