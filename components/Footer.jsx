@@ -13,11 +13,11 @@ const footerLinks = {
 
 const POLICIES = {
   'Privacy Policy': {
-    updated: 'May 2024',
+    updated: 'July 2026',
     sections: [
       {
         title: '1. Who We Are',
-        body: `Bejoice Global Logistics LLC ("Bejoice", "we", "our", or "us") is a freight forwarding and logistics company headquartered in Dammam, Kingdom of Saudi Arabia, with offices in Dubai (UAE), India, and China. We are the data controller for personal information collected through this website and our services.\n\nRegistered address: Block A, Al Raja Avenue, 1st Floor, Office No. 2, Dammam 32234, Kingdom of Saudi Arabia.\nEmail: info@bejoiceshipping-ksa.com | Phone: +966 13 823 3461`,
+        body: `Bejoice Global Logistics LLC ("Bejoice", "we", "our", or "us") is a freight forwarding and logistics company headquartered in Dammam, Kingdom of Saudi Arabia, with offices in Dubai (UAE), India, and China. We are the data controller for personal information collected through this website and our services.\n\nRegistered address: Block A, Al Raja Avenue, 1st Floor, Office No. 2, Dammam 32234, Kingdom of Saudi Arabia.\nEmail: info@bejoiceshipping-ksa.com | Phone: +966-138233461`,
       },
       {
         title: '2. Information We Collect',
@@ -61,7 +61,7 @@ const POLICIES = {
       },
       {
         title: '12. Contact Us',
-        body: `For any privacy-related questions, requests, or complaints:\n\nBejoice Global Logistics LLC\nBlock A, Al Raja Avenue, 1st Floor, Office No. 2\nDammam 32234, Kingdom of Saudi Arabia\nEmail: info@bejoiceshipping-ksa.com\nPhone: +966 13 823 3461`,
+        body: `For any privacy-related questions, requests, or complaints:\n\nBejoice Global Logistics LLC\nBlock A, Al Raja Avenue, 1st Floor, Office No. 2\nDammam 32234, Kingdom of Saudi Arabia\nEmail: info@bejoiceshipping-ksa.com\nPhone: +966-138233461`,
       },
     ],
     arSections: [
@@ -116,7 +116,7 @@ const POLICIES = {
     ],
   },
   'Terms of Service': {
-    updated: 'May 2024',
+    updated: 'July 2026',
     sections: [
       {
         title: 'I. Definitions',
@@ -1133,7 +1133,12 @@ export default function Footer({ onWhyClick, onQuoteClick, onCertificationsClick
                   <a href="tel:+966138233461" dir="ltr" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 'clamp(14px,1.5vw,17px)', color: 'rgba(255,255,255,0.90)', textDecoration: 'none', transition: 'color 0.3s', lineHeight: 1.5, direction: 'ltr', unicodeBidi: 'embed' }}
                     onMouseEnter={e => e.target.style.color = '#ffffff'}
                     onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.90)'}
-                  >+966 13 823 3461</a>
+                  >+966-138233461</a>
+                  <br/>
+                  <a href="tel:+966545353896" dir="ltr" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 'clamp(14px,1.5vw,17px)', color: 'rgba(255,255,255,0.90)', textDecoration: 'none', transition: 'color 0.3s', lineHeight: 1.5, direction: 'ltr', unicodeBidi: 'embed' }}
+                    onMouseEnter={e => e.target.style.color = '#ffffff'}
+                    onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.90)'}
+                  >+966-545353896</a>
                   <span style={{ color: 'rgba(91,194,231,0.5)', fontSize: '12px' }}>·</span>
                   <a href="mailto:info@bejoiceshipping-ksa.com" dir="ltr" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 'clamp(14px,1.5vw,17px)', color: 'rgba(255,255,255,0.90)', textDecoration: 'none', transition: 'color 0.3s', lineHeight: 1.5, direction: 'ltr', unicodeBidi: 'embed', whiteSpace: 'nowrap' }}
                     onMouseEnter={e => e.target.style.color = '#ffffff'}
